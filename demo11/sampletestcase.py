@@ -13,7 +13,7 @@ def test_code():
 # capture shadow dom elements
   cssSelectorForHost1 = "dh-io-vmos[class='webcomponent aem-GridColumn aem-GridColumn--default--12']"
   shadowhost=driver.find_element(By.CSS_SELECTOR ,("dh-io-vmos[class='webcomponent aem-GridColumn aem-GridColumn--default--12'")).click()
-  time.sleep(20)
+  time.sleep(10)
   shadow_root = driver.execute_script('return arguments[0].shadowRoot', shadowhost)
   print(shadowhost)
   shadow_root.find_element(By.CSS_SELECTOR("#hatchback-portaledId"))
