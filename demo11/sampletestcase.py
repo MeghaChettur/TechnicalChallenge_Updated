@@ -6,7 +6,11 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
-from selenium.webdriver import Remote
+from selenium.webdriver import Remote, ActionChains
+from selenium.webdriver.support import select
+from selenium.webdriver.support.ui import Select
+
+
 def start_driver():
   options = webdriver.ChromeOptions()
   options.add_argument('--start-maximized')
@@ -50,15 +54,48 @@ if __name__ == '__main__':
   hatchback_button.click()
   time.sleep(1)
   hatchback_button.click()
-  #hatchback_button = outer_2.find_element('css selector', '#filters-placeholder > div > div > section:nth-child(2) > button:nth-child(5)')
-  #print(hatchback_button)
-  #hatchback_button.click()
-  #cookie_accept_button = outer.find_element('xpath', '/div/div/div[2]/cmm-buttons-wrapper/div/div')
-  #cookie_accept_button.click()
-  #print(cookie_accept_button)
-  #hatchbacks_button_xpath = '/html/body/div[1]/div/div[1]/div/dh-io-vmos//div[2]/div[3]/div/div/div[1]/div/div/section[2]/button[4]'
-  #driver.find_element('xpath', hatchbacks_button_xpath)
-  os.system('pause')
+
+  a = ActionChains(driver)
+  shadow_root_3 = driver.find_element('xpath', '/html/body/div[1]/div/div[1]/div/dh-io-vmos')
+  outer_3 = expand_shadow_element(driver, shadow_root_3)
+  buttons1 = outer_3.find_elements('css selector', 'div.dh-io-vmos_3dj27.dh-io-vmos_1_SKc.wb-new-colors > div > div > div > div > div > div:nth-child(4) > section > div:nth-child(1) > div.wb-grid-row.dh-io-vmos_tGY4l > div:nth-child(2) > div')
+  for item in buttons1:
+    text = item.text
+    print(text)
+    time.sleep(1)
+  #Build = buttons1.find_element('css selector','#filters-placeholder').click()
+  #WebElement  = driver.find_element('css selector', ('div.dh-io-vmos_3dj27.dh-io-vmos_1_SKc.wb-new-colors > div > div > div > div > div > div:nth-child(4) > section > div > div > div:nth-child(2) > div > wb-popover > ul > li:nth-child(2)'))
+ # AclassSaloon = buttons1.find_element('css selector','div.dh-io-vmos_3dj27.dh-io-vmos_1_SKc.wb-new-colors > div > div > div > div > div > div:nth-child(4) > section > div > div > div:nth-child(2) > div > wb-popover > ul > li:nth-child(2) > a')
+
+  driver.get('https://www.mercedes-benz.co.uk/passengercars/mercedes-benz-cars/car-configurator.html/motorization/CCci/GB/en/A-KLASSE/KOMPAKT-LIMOUSINE')
+  shadow_root_4 = driver.find_element('xpath', '/html/body/div[1]/div/div[1]/div/owcc-car-configurator')
+  outer_4 = expand_shadow_element(driver, shadow_root_4)
+  Button2 = outer_4.find_elements('css selector', '#cc-app-container-main > div.cc-app-container__main-frame.cc-grid-container > div.cc-grid-container.ng-star-inserted > div > div:nth-child(2) > cc-motorization > cc-motorization-filters > cc-motorization-filters-form > form > div')
+  #Filter_Button = Button[1]
+  #time.sleep(1)
+  #Filter_Button.click()
+  for items in Button2:
+    text = items.text
+    print(text)
+    print(items.get_attribute('Fuel type'))
+    option_Filter = select.select_by_index(2)
+    print(option_Filter)
+  ChooseFuel = items.get_attribute('Fuel type')
+  #ChooseFuel.click()
+  time.sleep(1)
+
+  driver.save_screenshot("benz.png")
+
+  driver.quit()
+
+
+
+
+ # Fueltype = Filter.find_element('css selector','#cc-app-container-main > div.cc-app-container__main-frame.cc-grid-container > div.cc-grid-container.ng-star-inserted > div > div:nth-child(2) > cc-motorization > cc-motorization-filters > cc-motorization-filters-form > form > div > div.cc-motorization-filters-form__primary > div.cc-motorization-filters-form__primary-filters.ng-star-inserted > cc-motorization-filters-primary-filters > div > fieldset > wb-multi-select-control')
+ # Filter_Diesel = Select(driver.find_element('css selector','//*[@id="cc-app-container-main"]/div[2]/div[2]/div/div[2]/cc-motorization/cc-motorization-filters/cc-motorization-filters-form/form/div/div[1]/div[2]/cc-motorization-filters-primary-filters/div/fieldset/wb-multi-select-control/button'))
+
+
+  #os.system('pause')
 
 
   #iframe = driver.find_element(By.CSS_SELECTOR, "#kx-proxy-tebu6a5nw")
