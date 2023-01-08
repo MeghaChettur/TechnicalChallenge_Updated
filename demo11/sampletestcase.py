@@ -17,12 +17,13 @@ def start_driver():
   options.add_experimental_option('excludeSwitches', ['enable-logging'])
   driver = webdriver.Chrome(options=options)
   return driver
-  # switch to frame
+  # switch to shadowdom
 
 def expand_shadow_element(driver, element):
   shadow_root = driver.execute_script('return arguments[0].shadowRoot', element)
   return shadow_root
 
+# Accept cookies popup
 def accept_cookies(driver):
   shadow_root_1 = driver.find_element('xpath', '/html/body/cmm-cookie-banner')
   outer = expand_shadow_element(driver, shadow_root_1)
@@ -30,7 +31,7 @@ def accept_cookies(driver):
   button = outer.find_element('css selector', 'div > div > button.wb-button.wb-button--primary.wb-button--small.wb-button--accept-all')
   button.click()
 
-
+#Launch URL
 def main():
   driver = start_driver()
   driver.get('https://www.mercedes-benz.co.uk/passengercars')
@@ -43,7 +44,7 @@ def main():
 if __name__ == '__main__':
   driver = main()
 
-
+#Capturing the shadow elements (click hatchback-Build Car-Filter FuelType)
 
   #driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
   #time.sleep(2)
@@ -83,8 +84,9 @@ if __name__ == '__main__':
   ChooseFuel = items.get_attribute('Fuel type')
   #ChooseFuel.click()
   time.sleep(1)
+# Get Screenshot of the Page
 
-  driver.save_screenshot("benz.png")
+  driver.save_screenshot("Fueltypes.png")
 
   driver.quit()
 
